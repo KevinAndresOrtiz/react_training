@@ -1,5 +1,10 @@
-export function App() {
+import { Fragment } from "react";
+
+export const App = () => {
     return (
-        <h1>First hello world in react!</h1>
+        <Fragment>
+            <h1>Kevin</h1>
+            <p>Tengo 29 años</p>
+        </Fragment>
     );
 }
