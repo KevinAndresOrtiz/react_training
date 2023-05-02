@@ -15,3 +15,9 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string
 };
+
+App.defaultProps = {
+    title: 'No hay ningun titulo',
+    subtitle: 'No hay subtitulo',
+    name : 'Kevin'
+}

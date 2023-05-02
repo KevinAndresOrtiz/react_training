@@ -7,7 +7,7 @@ import './style.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App title='Hola Soy Goku' subtitle='Esta es una descripcion de que soy Goku' />
+        <App />
     </React.StrictMode>
 );
 
