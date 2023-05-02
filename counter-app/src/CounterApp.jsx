@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 
 export const CounterApp = ({ counter }) => {
-    function handleAdd() {
-        console.log('+1');
-        counter = 1000;
+    const [ counterValue, setCounterValue ] = useState(counter);
+    const handleAdd = ()=> {
+        setCounterValue(counterValue + 1)
     }
 
     return(
         <>
         <h2>Counter App</h2>
-        <p>{ counter }</p>
+        <p>{ counterValue }</p>
         <button onClick={ handleAdd }>
             +1
         </button>
