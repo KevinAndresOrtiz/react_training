@@ -1,15 +1,11 @@
 import { Fragment } from "react";
 
-const getSaludo = () => {
-    return 'Este es mi primer llamado de una funcion'
-}
 
-export const App = () => {
+export const App = ( { title, subtitle  } ) => {
     return (
         <Fragment>
-            <h1>Hola Mundo</h1>
-            {getSaludo()}
-            <p>Tengo 29 años</p>
+            {title}
+            <p>{ subtitle }</p>
         </Fragment>
     );
 }
