@@ -1,3 +1,4 @@
+import PropTypes  from "prop-types";
 import { Fragment } from "react";
 
 
@@ -9,3 +10,8 @@ export const App = ( { title, subtitle  } ) => {
         </Fragment>
     );
 }
+
+App.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string
+};
