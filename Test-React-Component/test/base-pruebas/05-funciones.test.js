@@ -1,4 +1,4 @@
-import { getUser, getUsuarioActivo } from "../src/base-pruebas/05-funciones";
+import { getUser, getUsuarioActivo } from "../../src/base-pruebas/05-funciones";
 
 describe('Pruebas en 5-funciones', () => {
     test('getUser debe de retornar un objeto', () => {
