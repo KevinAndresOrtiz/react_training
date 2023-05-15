@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true },
-  { text: 'Tomar el curso de react.js', completed: true },
+  { text: 'Tomar el curso de react.js', completed: false },
   { text: 'Llorar con la llorona', completed: false },
   { text: 'Curso 2 de react.js', completed: false },
   { text: 'Tomar cursos de cloudguru', completed: false },
@@ -18,6 +18,7 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const completedTodos = todos.filter((value) => value.completed === true).length;
   const totalTodos = todos.length;
+  const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
 
   return (
     <React.Fragment>
@@ -26,7 +27,7 @@ function App() {
             searchValue={searchValue} 
             setSearchValue={setSearchValue}/>
       <TodoList >
-        {todos.map(todo => (<TodoItem key={todo.text} text={todo.text} completed={todo.completed} />))}
+        {searchedTodos.map(todo => (<TodoItem key={todo.text} text={todo.text} completed={todo.completed} />))}
       </TodoList>
       <CreateTodoButton />
     </React.Fragment>
