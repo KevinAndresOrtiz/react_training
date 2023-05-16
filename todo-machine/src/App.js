@@ -13,29 +13,35 @@ import React, { useState } from 'react';
 //   { text: 'Tomar cursos de cloudguru', completed: false },
 // ];
 
+function useLocalStorage(itemName, initialValue) {
+  const localStorageTodos = localStorage.getItem(itemName);
+  let parsedItem;
+  if(!localStorageTodos) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = [];
+  } else {
+    parsedItem = JSON.parse(localStorageTodos);
+  }
 
+  const [item, setItem] = useState(parsedItem);
+
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName,JSON.stringify(newItem));
+    setItem(newItem);
+  }; 
+
+  return [item, saveItem];
+
+}
 
 function App() {
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-  let parsedTodos;
-  if(!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
 
-  }
-  parsedTodos = JSON.parse(localStorageTodos);
-  const [todos, setTodos] = useState(parsedTodos);
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = useState('');
   const completedTodos = todos.filter((value) => value.completed === true).length;
   const totalTodos = todos.length;
   const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
-
-  const saveTodos = (newTodos) => {
-    localStorage.setItem('TODOS_V1',JSON.stringify(newTodos));
-    setTodos(newTodos);
-  }; 
 
   const completeTodos = (text) => {
     const newTodos = [...todos];
