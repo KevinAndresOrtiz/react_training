@@ -1,11 +1,7 @@
 import './App.css';
-import { TodoCounter } from '../TodoCounter';
-import { TodoSearch } from '../TodoSearch';
-import { TodoList } from '../TodoList';
-import { TodoItem } from '../TodoItem';
-import { CreateTodoButton } from '../CreateTodoButton';
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import {useLocalStorage} from './useLocalStorage';
+import { AppUI } from './AppUI';
 
 // const defaultTodos = [
 //   { text: 'Cortar cebolla', completed: true },
@@ -21,7 +17,13 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const completedTodos = todos.filter((value) => value.completed === true).length;
   const totalTodos = todos.length;
+
+  useState(() => {
+    console.log('looooooog2');
+    console.log(totalTodos);
+  }, [totalTodos]);
   const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
+
 
   const completeTodos = (text) => {
     const newTodos = [...todos];
@@ -35,27 +37,7 @@ function App() {
     saveTodos(todosDeleted);
   };
 
-  return (
-    <React.Fragment>
-      <TodoCounter completed={completedTodos} total={totalTodos} />
-      <TodoSearch 
-            searchValue={searchValue} 
-            setSearchValue={setSearchValue}/>
-      <TodoList >
-        {searchedTodos.map(todo => (
-          <TodoItem 
-              key={todo.text} 
-              text={todo.text} 
-              completed={todo.completed} 
-              onComplete={() => completeTodos(todo.text)}
-              onDelete={() => deleteTodos(todo.text)}
-          />)
-          )
-        }
-      </TodoList>
-      <CreateTodoButton />
-    </React.Fragment>
-  );
+  return (<AppUI setSearchValue={setSearchValue} completedTodos={completedTodos} totalTodos={totalTodos} searchedTodos={searchedTodos} completeTodos={completeTodos} deleteTodos={deleteTodos}   />);
 }
 
 
