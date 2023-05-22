@@ -13,15 +13,10 @@ import { AppUI } from './AppUI';
 
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = useState('');
   const completedTodos = todos.filter((value) => value.completed === true).length;
   const totalTodos = todos.length;
-
-  useState(() => {
-    console.log('looooooog2');
-    console.log(totalTodos);
-  }, [totalTodos]);
   const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
 
 
@@ -37,7 +32,15 @@ function App() {
     saveTodos(todosDeleted);
   };
 
-  return (<AppUI setSearchValue={setSearchValue} completedTodos={completedTodos} totalTodos={totalTodos} searchedTodos={searchedTodos} completeTodos={completeTodos} deleteTodos={deleteTodos}   />);
+  return (<AppUI 
+                loading={loading}
+                error={error}
+                setSearchValue={setSearchValue} 
+                completedTodos={completedTodos} 
+                totalTodos={totalTodos} 
+                searchedTodos={searchedTodos} 
+                completeTodos={completeTodos} 
+                deleteTodos={deleteTodos}   />);
 }
 
 
