@@ -6,6 +6,7 @@ export const TodoContext = createContext();
 export function TodoProvider({children}) {
     const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);
     const [searchValue, setSearchValue] = useState('');
+    const [openModal, setOpenModal] = useState(false);
     const completedTodos = todos.filter((value) => value.completed === true).length;
     const totalTodos = todos.length;
     const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
@@ -25,6 +26,8 @@ export function TodoProvider({children}) {
   
     return (
        <TodoContext.Provider value={{
+            openModal,
+            setOpenModal,
             loading,
             error,
             completedTodos,

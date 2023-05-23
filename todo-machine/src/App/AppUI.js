@@ -8,6 +8,7 @@ import { TodoList } from "../TodoList";
 import { TodoSearch } from "../TodoSearch";
 import { TodosError } from "../TodosError";
 import { TodosLoading } from "../TodosLoading";
+import { Modal } from "../Modal";
 
 
 export function AppUI() {
@@ -16,7 +17,8 @@ export function AppUI() {
             error,
             searchedTodos,
             completeTodos,
-            deleteTodos
+            deleteTodos,
+            openModal
     } = useContext(TodoContext);
     return (
         <>
@@ -44,6 +46,13 @@ export function AppUI() {
                             }
                         </TodoList>
             <CreateTodoButton />
+            {
+                openModal && (
+                    <Modal>
+                        La funcionalidad de agregar todo
+                    </Modal>
+                )
+            }
         </>
     );
 }
