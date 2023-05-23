@@ -11,7 +11,14 @@ export function TodoProvider({children}) {
     const totalTodos = todos.length;
     const searchedTodos = todos.filter((value) => value.text.toLowerCase().includes(searchValue.toLocaleLowerCase()));
   
-  
+    const addTodo = (text) => {
+        const newTodos = [...todos];
+        newTodos.push({
+            text,
+            completed: false
+        })
+        saveTodos(newTodos)
+    }
     const completeTodos = (text) => {
       const newTodos = [...todos];
       const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -27,6 +34,7 @@ export function TodoProvider({children}) {
     return (
        <TodoContext.Provider value={{
             openModal,
+            addTodo,
             setOpenModal,
             loading,
             error,
